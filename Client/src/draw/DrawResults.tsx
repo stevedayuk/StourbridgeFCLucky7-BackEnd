@@ -4,7 +4,7 @@ import Row from 'react-bootstrap/Row';
 import Table from 'react-bootstrap/Table';
 import styles from './DrawResults.module.css';
 import DrawBrandHeader from "./DrawBrandHeader.tsx";
-// import DrawPromo from "./DrawPromo.tsx";
+import DrawPromo from "./DrawPromo.tsx";
 
 type DrawResultsProps = {
     drawMonthName: string | null;
@@ -36,11 +36,15 @@ export default function DrawResults(props: DrawResultsProps) {
                     </tbody>
                 </Table>
             </div>
+            <div className={styles.drawResultsPromo}>
+                <DrawPromo />
+            </div>
         </div>
+
         <Row>
             <Col xs={7}></Col>
             <Col xs={5}>
-                {/*<DrawPromo />*/}
+
             </Col>
         </Row>
     </div>

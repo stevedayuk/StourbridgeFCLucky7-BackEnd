@@ -6,6 +6,8 @@ public static class ServiceCollectionExtensions
     {
         services.AddScoped<DrawService>();
         services.AddScoped<EntryService>();
+        services.AddScoped<ReferralService>();
+        services.AddScoped<RegisteredUsersService>();
         services.AddScoped<WinnersService>();
 
         return services;

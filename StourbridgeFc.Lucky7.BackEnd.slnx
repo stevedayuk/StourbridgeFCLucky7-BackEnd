@@ -1,0 +1,7 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path="compose.yaml" />
+  </Folder>
+  <Project Path="API/StourbridgeFc.Lucky7.Api.csproj" />
+  <Project Path="Data/StourbridgeFc.Lucky7.Data.csproj" />
+</Solution>

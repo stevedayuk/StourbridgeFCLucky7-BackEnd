@@ -9,27 +9,43 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="ClosedXML" />
-        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" />
-        <PackageReference Include="Microsoft.AspNetCore.OpenApi" />
+        <PackageReference Include="brevo_csharp"/>
+        <PackageReference Include="ClosedXML"/>
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer"/>
+        <PackageReference Include="Microsoft.AspNetCore.OpenApi"/>
         <PackageReference Include="Microsoft.EntityFrameworkCore.Design">
-          <PrivateAssets>all</PrivateAssets>
-          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
         <PackageReference Include="Microsoft.EntityFrameworkCore.Tools">
-          <PrivateAssets>all</PrivateAssets>
-          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-        <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" />
-        <PackageReference Include="Scalar.AspNetCore" />
+        <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL"/>
+        <PackageReference Include="Scalar.AspNetCore"/>
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Data\StourbridgeFc.Lucky7.Data.csproj" />
+        <ProjectReference Include="..\Data\StourbridgeFc.Lucky7.Data.csproj"/>
     </ItemGroup>
 
     <ItemGroup>
-      <Content Remove="global.json" />
+        <Folder Include="EmailTemplates\"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Update="EmailTemplates\email-verified.html">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="EmailTemplates\entry-confirmed.html">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="EmailTemplates\entry-confirmed-internal.html">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="EmailTemplates\verify-email.html">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
     </ItemGroup>
 
 </Project>

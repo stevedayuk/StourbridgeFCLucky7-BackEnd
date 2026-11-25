@@ -13,29 +13,38 @@ public class WinnersService
         _dataContext = dataContext;
     }
 
-    public async Task<PublicWinnersDto> GetDisplayWinnersAsync()
+    public async Task<PublicCurrentDrawDto> GetCurrentDrawWinnersAsync()
     {
-        PublicWinnersDto publicWinners = new PublicWinnersDto();
+        PublicCurrentDrawDto currentDrawWinners = new();
+
+        PublicDrawDto? currentDraw = await _dataContext.Draws.Where(p => p.IsPublished).Select(p => new PublicDrawDto
+        {
+            Month = p.Month,
+            Year = p.Year,
+        }).OrderByDescending(p => p.Year).ThenByDescending(p => p.Month).FirstOrDefaultAsync();
+
+        if (currentDraw is null)
+        {
+            return currentDrawWinners;
+        }
         
-        List<PublicDrawDto> draws = await _dataContext.Draws.Select(p => new PublicDrawDto
+        currentDrawWinners.Draw = currentDraw;
+
+        List<PublicWinnerDto> winners = await GetDisplayWinnersAsync(currentDraw.Month, currentDraw.Year);
+        currentDrawWinners.Winners = winners;
+        
+        return currentDrawWinners;
+    }
+
+    public async Task<List<PublicDrawDto>> GetPublishedDrawsListAsync()
+    {
+        List<PublicDrawDto> publishedDraws = await _dataContext.Draws.Where(p => p.IsPublished).Select(p => new PublicDrawDto
         {
             Month = p.Month,
             Year = p.Year,
         }).ToListAsync();
-        
-        publicWinners.Draws = draws;
-        
-        var currentDraw = draws.OrderByDescending(p => p.Year).ThenByDescending(p => p.Month).FirstOrDefault();
 
-        if (currentDraw is null)
-        {
-            return publicWinners;
-        }
-
-        List<PublicWinnerDto> currentDrawWinners = await GetDisplayWinnersAsync(currentDraw.Month, currentDraw.Year);
-        publicWinners.CurrentDrawWinners = currentDrawWinners;
-        
-        return publicWinners;
+        return publishedDraws;
     }
 
     public async Task<List<PublicWinnerDto>> GetDisplayWinnersAsync(int month, int year)
