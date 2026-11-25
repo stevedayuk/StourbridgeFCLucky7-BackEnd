@@ -1,8 +1,10 @@
 .qrCode {
+    align-items: center;
     background-color: white;
-    display: flex;
     color: black;
-    padding: 1rem;
+    display: flex;
+    gap: 1rem;
+    padding: 1rem 2rem 1rem 1rem;
 }
 
 .qrCode img {

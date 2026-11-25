@@ -10,6 +10,9 @@ public class Lucky7Context : DbContext
     public DbSet<Entry> Entries { get; set; }
     public DbSet<Option> Options { get; set; }
     public DbSet<PrizeLevel> PrizeLevels { get; set; }
+    public DbSet<ReferralVisit> ReferralVisits { get; set; }
+    public DbSet<ReferralVisitSource> ReferralVisitSources { get; set; }
+    public DbSet<RegisteredUser> RegisteredUsers { get; set; }
     
     public Lucky7Context(DbContextOptions<Lucky7Context> options) : base(options)
     { }
@@ -41,6 +44,28 @@ public class Lucky7Context : DbContext
                 .ValueGeneratedOnAdd();
             
             entity.Property(e => e.DateTimeAddedUtc).HasDefaultValueSql("now() at time zone 'utc' ");
+        });
+        
+        // ReferralVisit
+
+        modelBuilder.Entity<ReferralVisit>(entity =>
+        {
+            entity.Property(e => e.Id)
+                .ValueGeneratedOnAdd();
+            
+            entity.HasOne(p => p.ReferralVisitSource)
+                .WithMany()
+                .HasForeignKey(p => p.SourceId);
+        });
+        
+        // RegisteredUser
+
+        modelBuilder.Entity<RegisteredUser>(entity =>
+        {
+            entity.Property(e => e.Id)
+                .ValueGeneratedOnAdd();
+
+            entity.Property(e => e.RegisteredDate).HasDefaultValueSql("now() at time zone 'utc' ");
         });
     }
 }

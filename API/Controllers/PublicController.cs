@@ -4,22 +4,29 @@ using StourbridgeFc.Lucky7.Api.Services;
 
 namespace StourbridgeFc.Lucky7.Api.Controllers;
 
-[Route("winners")]
+[Route("public")]
 [ApiController]
-public class WinnerController : ControllerBase
+public class PublicController : ControllerBase
 {
     private readonly WinnersService _winnersService;
 
-    public WinnerController(WinnersService winnersService)
+    public PublicController(WinnersService winnersService)
     {
         _winnersService = winnersService;
     }
-
-    [HttpGet]
-    public async Task<ActionResult<PublicWinnersDto>> GetDisplayWinners()
+    
+    [HttpGet("current-draw")]
+    public async Task<ActionResult<PublicCurrentDrawDto>> GetCurrentDrawWinnersAsync()
     {
-        PublicWinnersDto publicWinners = await _winnersService.GetDisplayWinnersAsync();
+        PublicCurrentDrawDto publicWinners = await _winnersService.GetCurrentDrawWinnersAsync();
         return publicWinners;
+    }
+    
+    [HttpGet("draws")]
+    public async Task<ActionResult<List<PublicDrawDto>>> GetPublishedDrawsListAsync()
+    {
+        List<PublicDrawDto> publishedDraws = await _winnersService.GetPublishedDrawsListAsync();
+        return publishedDraws;
     }
 
     [HttpGet("draw")]

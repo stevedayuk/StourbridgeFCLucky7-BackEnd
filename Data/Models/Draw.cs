@@ -7,6 +7,7 @@ public class Draw
     public int Year { get; set; }
     public DateTime DateTimeDrawStartedUtc { get; set; }
     public DateTime? DateTimeDrawCompletedUtc { get; set; }
+    public bool IsPublished { get; set; }
 
     public ICollection<DrawWinner> DrawWinners { get; set; } = new List<DrawWinner>();
 }
